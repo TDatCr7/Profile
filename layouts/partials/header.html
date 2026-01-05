@@ -1,5 +1,18 @@
 <header class="site-header">
   <div class="island" role="navigation" aria-label="Primary">
+     <!-- MOBILE: hamburger -->
+    <button
+      class="mob-burger"
+      id="mobMenuBtn"
+      type="button"
+      aria-label="Open menu"
+      aria-expanded="false"
+    >
+      ☰
+    </button>
+
+    <!-- MOBILE: Home ở giữa -->
+    <a class="mob-home" href='{{ "/" | relURL }}' data-nav>Home</a>
     <a class="island-brand" data-nav href='{{ "" | relURL }}'>Home</a>
 
     <div class="island-sep" aria-hidden="true"></div>
@@ -39,6 +52,23 @@
     <button class="theme-pill" type="button" id="snowToggle" aria-pressed="false" title="Snow">
       <span class="theme-ico" id="snowIcon" aria-hidden="true">❄️</span>
     </button>
+ <!-- MOBILE DRAWER -->
+  <div class="mob-drawer" id="mobDrawer" aria-hidden="true">
+    <div class="mob-drawer-backdrop" data-drawer-close></div>
 
+    <div class="mob-drawer-panel surface">
+      <div class="mob-drawer-head">
+        <span class="mob-drawer-title">Menu</span>
+        <button class="mob-drawer-x" type="button" data-drawer-close aria-label="Close">×</button>
+      </div>
+
+      <nav class="mob-drawer-nav">
+        <a href='{{ "/" | relURL }}' data-nav>Home</a>
+        <a href='{{ "about/" | relURL }}' data-nav>About</a>
+        <a href='{{ "certificate/" | relURL }}' data-nav>Certificate</a>
+        <a href='{{ "projects/" | relURL }}' data-nav>Projects</a>
+        <a href='{{ "contact/" | relURL }}' data-nav>Contact</a>
+      </nav>
+    </div>
   </div>
 </header>

@@ -2156,3 +2156,158 @@ a {
     height: 220px;
   }
 }
+
+/* =========================
+   MOBILE HEADER: burger + center home + drawer
+   DÁN CUỐI FILE
+   ========================= */
+
+.mob-burger,
+.mob-home {
+  display: none;
+}
+
+.island-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* mobile layout */
+@media (max-width: 720px) {
+  .island {
+    display: grid;
+    grid-template-columns: 44px 1fr auto;
+    align-items: center;
+    gap: 10px;
+    justify-content: initial;
+    /* override justify-content: space-between */
+  }
+
+  .mob-burger {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 40px;
+    border-radius: var(--r-pill);
+    border: 1px solid var(--border);
+    background: var(--surface-1);
+    color: var(--text);
+    cursor: pointer;
+    font-size: 18px;
+    line-height: 1;
+  }
+
+  .mob-home {
+    display: inline-flex;
+    justify-self: center;
+    align-items: center;
+    height: 40px;
+    padding: 0 14px;
+    border-radius: var(--r-pill);
+    border: 1px solid var(--border);
+    background: rgba(255, 255, 255, .04);
+    text-decoration: none;
+    font-weight: 750;
+    letter-spacing: .2px;
+    white-space: nowrap;
+  }
+
+  :root[data-theme="light"] .mob-home {
+    background: rgba(12, 14, 24, .04);
+  }
+
+  /* Ẩn nav dạng island trên mobile (đỡ chiếm chỗ) */
+  .island-nav {
+    display: none;
+  }
+
+  /* Nếu bạn vẫn còn island-brand cũ thì ẩn luôn trên mobile */
+  .island-brand {
+    display: none;
+  }
+
+  .island-actions {
+    justify-self: end;
+  }
+}
+
+/* drawer */
+.mob-drawer {
+  position: fixed;
+  inset: 0;
+  z-index: 2500;
+  /* > header 50, < toast 3000 */
+  display: none;
+}
+
+.mob-drawer.is-open {
+  display: block;
+}
+
+.mob-drawer-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, .55);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+:root[data-theme="light"] .mob-drawer-backdrop {
+  background: rgba(12, 14, 24, .45);
+}
+
+.mob-drawer-panel {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  width: min(340px, calc(100vw - 28px));
+  padding: 14px;
+  border-radius: var(--r);
+}
+
+.mob-drawer-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 4px 4px 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.mob-drawer-title {
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  font-size: 12px;
+  opacity: .85;
+}
+
+.mob-drawer-x {
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--surface-1);
+  color: var(--text);
+  cursor: pointer;
+  font-size: 20px;
+  line-height: 1;
+}
+
+.mob-drawer-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-top: 12px;
+}
+
+.mob-drawer-nav a {
+  text-decoration: none;
+  padding: 12px 12px;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  background: var(--surface-inset);
+  box-shadow: var(--shadow-sm);
+}

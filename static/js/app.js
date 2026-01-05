@@ -528,6 +528,8 @@
     // CERT VIEWER
     initCertViewer();
 
+    initMobileDrawer();
+
     // CONTACT
     initContactFeature();
 
