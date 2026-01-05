@@ -1,18 +1,18 @@
 <header class="site-header">
   <div class="island" role="navigation" aria-label="Primary">
-     <!-- MOBILE: hamburger -->
+    <!-- MOBILE: hamburger -->
     <button
       class="mob-burger"
       id="mobMenuBtn"
       type="button"
       aria-label="Open menu"
       aria-expanded="false"
-    >
-      ☰
-    </button>
+    >☰</button>
 
     <!-- MOBILE: Home ở giữa -->
     <a class="mob-home" href='{{ "/" | relURL }}' data-nav>Home</a>
+
+    <!-- DESKTOP brand -->
     <a class="island-brand" data-nav href='{{ "" | relURL }}'>Home</a>
 
     <div class="island-sep" aria-hidden="true"></div>
@@ -26,18 +26,29 @@
 
     <div class="island-sep" aria-hidden="true"></div>
 
-    <button class="music-pill" type="button" id="musicToggle" aria-pressed="false" title="Play/Pause">
-      <span class="music-icon" id="musicIcon" aria-hidden="true">▶</span>
-      <span class="music-title">
-        {{ with site.Home.Params.songTitle }}{{ . }}{{ else }}Hào Khí Việt Nam{{ end }}
-      </span>
-      <span class="eq" aria-hidden="true">
-        <span class="bar b1"></span>
-        <span class="bar b2"></span>
-        <span class="bar b3"></span>
-        <span class="bar b4"></span>
-      </span>
-    </button>
+    <!-- RIGHT GROUP (bắt buộc) -->
+    <div class="island-actions">
+      <button class="music-pill" type="button" id="musicToggle" aria-pressed="false" title="Play/Pause">
+        <span class="music-icon" id="musicIcon" aria-hidden="true">▶</span>
+        <span class="music-title">
+          {{ with site.Home.Params.songTitle }}{{ . }}{{ else }}Hào Khí Việt Nam{{ end }}
+        </span>
+        <span class="eq" aria-hidden="true">
+          <span class="bar b1"></span>
+          <span class="bar b2"></span>
+          <span class="bar b3"></span>
+          <span class="bar b4"></span>
+        </span>
+      </button>
+
+      <button class="theme-pill" type="button" id="themeToggle" aria-pressed="false" title="Theme">
+        <span class="theme-ico" id="themeIcon" aria-hidden="true">🌙</span>
+      </button>
+
+      <button class="theme-pill" type="button" id="snowToggle" aria-pressed="false" title="Snow">
+        <span class="theme-ico" id="snowIcon" aria-hidden="true">❄️</span>
+      </button>
+    </div>
 
     <audio id="bgm" preload="auto" loop>
       <source
@@ -45,23 +56,16 @@
         type="audio/mpeg"
       />
     </audio>
+  </div>
 
-    <button class="theme-pill" type="button" id="themeToggle" aria-pressed="false" title="Theme">
-      <span class="theme-ico" id="themeIcon" aria-hidden="true">🌙</span>
-    </button>
-    <button class="theme-pill" type="button" id="snowToggle" aria-pressed="false" title="Snow">
-      <span class="theme-ico" id="snowIcon" aria-hidden="true">❄️</span>
-    </button>
- <!-- MOBILE DRAWER -->
+  <!-- MOBILE DRAWER (đưa ra ngoài island) -->
   <div class="mob-drawer" id="mobDrawer" aria-hidden="true">
     <div class="mob-drawer-backdrop" data-drawer-close></div>
-
     <div class="mob-drawer-panel surface">
       <div class="mob-drawer-head">
         <span class="mob-drawer-title">Menu</span>
         <button class="mob-drawer-x" type="button" data-drawer-close aria-label="Close">×</button>
       </div>
-
       <nav class="mob-drawer-nav">
         <a href='{{ "/" | relURL }}' data-nav>Home</a>
         <a href='{{ "about/" | relURL }}' data-nav>About</a>

@@ -2367,3 +2367,72 @@ a {
     width: 3px !important;
   }
 }
+
+@media (max-width: 720px) {
+
+  /* island thành 3 cột: trái / giữa / phải */
+  .island {
+    display: grid !important;
+    grid-template-columns: 44px 1fr auto !important;
+    align-items: center !important;
+    gap: 10px !important;
+    width: calc(100vw - 18px) !important;
+    padding: 10px 10px !important;
+  }
+
+  /* ẩn phần desktop */
+  .island-nav,
+  .island-sep,
+  .island-brand {
+    display: none !important;
+  }
+
+  /* hiện phần mobile */
+  .mob-burger,
+  .mob-home {
+    display: inline-flex !important;
+  }
+
+  /* cụm nút bên phải: luôn nằm 1 hàng */
+  .island-actions {
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    flex-wrap: nowrap !important;
+    justify-self: end !important;
+    min-width: 0 !important;
+  }
+
+  /* giảm độ rộng music pill trên mobile */
+  .music-title {
+    display: none !important;
+  }
+
+  .music-pill {
+    padding: 0 10px !important;
+  }
+
+  /* cố định kích thước để không bị ép xuống dòng */
+  .mob-burger {
+    width: 44px;
+    height: 40px;
+  }
+
+  .theme-pill {
+    width: 44px;
+    height: 40px;
+  }
+
+  .music-pill {
+    height: 40px;
+  }
+
+  /* Home giữa không tràn */
+  .mob-home {
+    justify-self: center !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    max-width: 46vw !important;
+  }
+}
