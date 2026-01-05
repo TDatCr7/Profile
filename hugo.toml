@@ -1,8 +1,6 @@
 baseURL = "https://tdatcr7.github.io/Profile/"
 languageCode = "vi-vn"
 title = "Profile"
-relativeURLs = true
-canonifyURLs = true
 
 [markup]
   [markup.goldmark]
