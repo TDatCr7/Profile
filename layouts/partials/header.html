@@ -10,7 +10,7 @@
     >☰</button>
 
     <!-- MOBILE: Home ở giữa -->
-    <a class="mob-home" href='{{ "/" | relURL }}' data-nav>Home</a>
+    <a class="mob-home" href='{{ "" | relURL }}' data-nav>Home</a>
 
     <!-- DESKTOP brand -->
     <a class="island-brand" data-nav href='{{ "" | relURL }}'>Home</a>
@@ -67,6 +67,7 @@
         <button class="mob-drawer-x" type="button" data-drawer-close aria-label="Close">×</button>
       </div>
       <nav class="mob-drawer-nav">
+        <a href='{{ "" | relURL }}' data-nav>Home</a>
         <a href='{{ "about/" | relURL }}' data-nav>About</a>
         <a href='{{ "certificate/" | relURL }}' data-nav>Certificate</a>
         <a href='{{ "projects/" | relURL }}' data-nav>Projects</a>
