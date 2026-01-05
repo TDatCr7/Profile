@@ -442,6 +442,43 @@
       if (submitBtn) submitBtn.disabled = false;
     });
   }
+  function initMobileDrawer() {
+    const btn = document.getElementById("mobMenuBtn");
+    const drawer = document.getElementById("mobDrawer");
+    if (!btn || !drawer) return;
+
+    const closeEls = drawer.querySelectorAll("[data-drawer-close]");
+    const navLinks = drawer.querySelectorAll("a[data-nav]");
+
+    function open() {
+      drawer.classList.add("is-open");
+      drawer.setAttribute("aria-hidden", "false");
+      btn.setAttribute("aria-expanded", "true");
+      document.documentElement.style.overflow = "hidden";
+    }
+
+    function close() {
+      drawer.classList.remove("is-open");
+      drawer.setAttribute("aria-hidden", "true");
+      btn.setAttribute("aria-expanded", "false");
+      document.documentElement.style.overflow = "";
+    }
+
+    btn.addEventListener("click", () => {
+      const isOpen = drawer.classList.contains("is-open");
+      if (isOpen) close();
+      else open();
+    });
+
+    closeEls.forEach((el) => el.addEventListener("click", close));
+
+    // bấm vào link trong menu thì đóng drawer (để không che màn hình)
+    navLinks.forEach((a) => a.addEventListener("click", close));
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") close();
+    });
+  }
 
   // ---------- main ----------
   document.addEventListener("DOMContentLoaded", function () {
