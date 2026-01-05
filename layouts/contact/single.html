@@ -1,6 +1,5 @@
 {{ define "main" }}
 <section class="contact-wrap enter">
-
   <div class="contact-grid">
 
     <!-- LEFT: info -->
@@ -28,6 +27,18 @@
           <span>{{ . }}</span>
         </div>
         {{ end }}
+
+        {{ with .Params.facebook }}
+        <div class="fact-row">
+          <b>Facebook</b>
+          {{ if or (hasPrefix . "http://") (hasPrefix . "https://") }}
+            <span><a href="{{ . }}" target="_blank" rel="noopener">Tiến Đạt</a></span>
+          {{ else }}
+            <span>{{ . }}</span>
+          {{ end }}
+        </div>
+        {{ end }}
+
       </div>
 
       {{ with .Params.email }}
@@ -51,8 +62,12 @@
         data-template="{{ with .Params.emailjs }}{{ .template_id }}{{ end }}"
         data-public="{{ with .Params.emailjs }}{{ .public_key }}{{ end }}"
       >
-        <!-- recipient: dùng trong EmailJS template -->
+        <!-- recipient -->
         <input type="hidden" name="to_email" value="{{ .Params.email }}"/>
+
+        <!-- EmailJS dùng để set Reply-To / From Name (JS sẽ fill trước khi gửi) -->
+        <input type="hidden" name="reply_to" value=""/>
+        <input type="hidden" name="from_name" value=""/>
 
         <div class="contact-row">
           <label class="contact-field">
@@ -68,7 +83,6 @@
 
         <label class="contact-field">
           <span>Subject</span>
-          <!-- EmailJS tutorial dùng name="title" cho Subject -->
           <input name="title" type="text" required />
         </label>
 

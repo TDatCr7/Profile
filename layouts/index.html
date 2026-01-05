@@ -1,36 +1,42 @@
 {{ define "main" }}
-<section class="home enter">
-  <!-- LEFT: ảnh + nhạc -->
-  <div class="home-left">
+<section class="home enter home-grid">
+
+  <!-- LEFT: ảnh -->
+  <div class="home-left home-area-left">
     <div class="portrait-card floaty">
       <div class="portrait-frame">
         <img
           class="portrait-img"
-          src='{{ "img/avatar.jpg" | relURL }}'
+          src='{{ with .Params.heroAvatar }}{{ . | relURL }}{{ else }}{{ "img/avatar.jpg" | relURL }}{{ end }}'
           alt="Portrait"
           loading="eager"
         />
       </div>
-
-      
     </div>
   </div>
 
-  <!-- RIGHT: chữ lấy từ front-matter -->
-  <div class="home-right">
+  <!-- RIGHT TOP: card chữ (ngang với ảnh) -->
+  <div class="home-area-top">
     <div class="text-panel">
-      {{ with .Params.heroKicker }}
-        <p class="kicker">{{ . }}</p>
-      {{ end }}
+      {{ with .Params.heroKicker }}<p class="kicker">{{ . }}</p>{{ end }}
+      {{ with .Params.heroTitle }}<h1 class="headline">{{ . }}</h1>{{ end }}
+      {{ with .Params.heroSubtitle }}<p class="subtitle">{{ . }}</p>{{ end }}
+    </div>
+  </div>
 
-      {{ with .Params.heroTitle }}
-        <h1 class="headline">{{ . }}</h1>
-      {{ end }}
-
-      {{ with .Params.heroSubtitle }}
-        <p class="subtitle">{{ . }}</p>
+  <!-- RIGHT BOTTOM: card hình/gif (nằm dưới card chữ) -->
+  <div class="home-area-bottom">
+    <div class="media-panel">
+      {{ $src := "" }}
+      {{ with .Params.heroMedia }}{{ $src = . }}{{ end }}
+      {{ if $src }}
+        <img class="media-img" src="{{ $src | relURL }}" alt="Media" loading="lazy" />
+      {{ else }}
+        <!-- fallback: đổi file này thành gif/img bạn muốn -->
+        <img class="media-img" src='{{ "img/home2.gif" | relURL }}' alt="Media" loading="lazy" />
       {{ end }}
     </div>
   </div>
+
 </section>
 {{ end }}

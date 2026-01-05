@@ -56,10 +56,10 @@ timeline:
 now:
   - "Sinh viên năm tư chuẩn bị thực tập và ra trường"
   - "Học tiếng anh TOEIC"
-  - "Mục tiêu tốt nghiệm -> có việc làm"
-
-ctaText: "Coming s"
+  - "Mục tiêu tốt nghiệp -> có việc làm"
+  - "Cải thiện kỹ năng mềm: giao tiếp, ngôn ngữ và quán lý thành viên."
+ctaText: "Coming soon - CV"
 cvUrl: "[CV_RELATIVE_PATH_OR_URL]"
 ---
 
-Facebook: [Tiến Đạt](https://www.facebook.com/share/16VqWz4Sqd/)
+Kỹ năng mềm: TeamWork, giao tiếp, tư dư logic, xử lý tình huống, tự học, Leader.

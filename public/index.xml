@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Profile</title>
+    <link>http://localhost:1313/LapTrinhMang/</link>
+    <description>Recent content on Profile</description>
+    <generator>Hugo</generator>
+    <language>vi-vn</language>
+    <atom:link href="http://localhost:1313/LapTrinhMang/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Chứng chỉ &amp; Thành tích</title>
+      <link>http://localhost:1313/LapTrinhMang/certificate/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/LapTrinhMang/certificate/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>CinemaS</title>
+      <link>http://localhost:1313/LapTrinhMang/projects/cinemas/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/LapTrinhMang/projects/cinemas/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Contact</title>
+      <link>http://localhost:1313/LapTrinhMang/contact/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/LapTrinhMang/contact/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Lập trình mạng</title>
+      <link>http://localhost:1313/LapTrinhMang/projects/lap-trinh-mang/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/LapTrinhMang/projects/lap-trinh-mang/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>NGÔ NGUYỄN TIẾN ĐẠT</title>
+      <link>http://localhost:1313/LapTrinhMang/about/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/LapTrinhMang/about/</guid>
+      <description>Yêu thích công nghệ, phá cách và tự do</description>
+    </item>
+    <item>
+      <title>Skills</title>
+      <link>http://localhost:1313/LapTrinhMang/skills/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/LapTrinhMang/skills/</guid>
+      <description>&lt;h2 id=&#34;frontend&#34;&gt;Frontend&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;HTML/CSS&lt;/li&gt;&#xA;&lt;li&gt;JavaScript&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;backend&#34;&gt;Backend&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;(điền)&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;tools&#34;&gt;Tools&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Git&lt;/li&gt;&#xA;&lt;li&gt;VS Code&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
+    </item>
+  </channel>
+</rss>

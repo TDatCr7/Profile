@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Projects của tôi on Profile</title>
+    <link>http://localhost:1313/LapTrinhMang/projects/</link>
+    <description>Recent content in Projects của tôi on Profile</description>
+    <generator>Hugo</generator>
+    <language>vi-vn</language>
+    <atom:link href="http://localhost:1313/LapTrinhMang/projects/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>CinemaS</title>
+      <link>http://localhost:1313/LapTrinhMang/projects/cinemas/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/LapTrinhMang/projects/cinemas/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Lập trình mạng</title>
+      <link>http://localhost:1313/LapTrinhMang/projects/lap-trinh-mang/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/LapTrinhMang/projects/lap-trinh-mang/</guid>
+      <description></description>
+    </item>
+  </channel>
+</rss>

@@ -2,7 +2,7 @@
 title: "CinemaS"
 layout: "cinema"
 subtitle: "Hệ thống rạp phim"
-instructor: "Lê Nguyên Khanh"
+advisor: "Lê Nguyên Khanh"
 start: "27/09/2025"
 end: "25/12/2025"
 github: "https://github.com/TDatCr7/DACN"
