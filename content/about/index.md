@@ -48,7 +48,7 @@ timeline:
     title: "Leader"
     desc: "Thực hiện và hoàn thành đố án cơ sở. Tiếp cận mức khá đề tài quản lý thư viện."
     tags: ["PHP", "CSS", "HTML","Bootstrap", "SQL Server"]
-  - when: "[27/09/2025 - Present]"
+  - when: "[27/09/2025 - 25/12/2025]"
     title: "Leader"
     desc: "Thực hiện và hoàn thành đồ án chuyên ngành. Tiếp cận tốt đề tài hệ thống rạp phim."
     tags: ["[C#", "JSON","CSS", "Bootstrap","ASP .NET", "SQL Server","Flutter/Dart"]
