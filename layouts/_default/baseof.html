@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    {{ partial "head.html" . }}
+  </head>
+
+  <body data-path="{{ .RelPermalink }}">
+    <!-- Thêm 1 lần vào trong <body> (tốt nhất ngay sau mở body) -->
+    <div class="sky-flash" aria-hidden="true"></div>
+
+    {{ partial "header.html" . }}
+    <main class="container" id="appMain">
+      {{ block "main" . }}{{ end }}
+    </main>
+    {{ partial "footer.html" . }}
+    <div id="certViewer" class="cert-viewer" aria-hidden="true">
+      <button type="button" class="cert-viewer-close" data-close aria-label="Close">✕</button>
+      <img id="certViewerImg" class="cert-viewer-img" alt="" />
+    </div>
+
+  </body>
+</html>

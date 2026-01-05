@@ -1,0 +1,17 @@
+baseURL = "https://tdatcr7.github.io/LapTrinhMang/"
+languageCode = "vi-vn"
+title = "Profile"
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
+[caches]
+  [caches.images]
+    dir = ':cacheDir/images'
+
+[params]
+songTitle = "Hào Khí Việt Nam"
+songSrc = "audio/haokhiVN.mp3"
+

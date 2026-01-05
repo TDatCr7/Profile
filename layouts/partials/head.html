@@ -1,0 +1,12 @@
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>{{ if .Title }}{{ .Title }} | {{ end }}{{ site.Title }}</title>
+
+{{ with .Params.description }}
+<meta name="description" content="{{ . }}" />
+{{ end }}
+
+<link rel="stylesheet" href='{{ "css/style.css" | relURL }}' />
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+

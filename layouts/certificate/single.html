@@ -1,0 +1,42 @@
+{{ define "main" }}
+<section class="certs-wrap enter">
+
+  <header class="certs-hero">
+    <p class="page-kicker">CERTIFICATE</p>
+    <h1 class="headline page-title">{{ .Title }}</h1>
+    {{ with .Params.subtitle }}<p class="subtitle page-subtitle">{{ . }}</p>{{ end }}
+  </header>
+
+  <div class="certs-grid">
+    {{ range .Params.certificates }}
+      <article class="cert-card" data-image='{{ .image | relURL }}' tabindex="0">
+        <button class="cert-open" type="button" aria-label="Open certificate">
+          <div class="cert-thumb">
+            <img src='{{ .image | relURL }}' alt="{{ .title }}" loading="lazy" />
+
+            <!-- overlay nằm TRONG thumb -->
+            <div class="cert-overlay">
+              <div class="cert-ov-top">
+                <div class="cert-ov-title">{{ .title }}</div>
+                <div class="cert-ov-badge">VERIFIED</div>
+              </div>
+
+              <div class="cert-ov-sub">Cấp bởi: {{ .issuer }}</div>
+              <div class="cert-ov-sub">Date: {{ .date }}</div>
+
+              {{ with .bullets }}
+                <div class="cert-ov-k">KỸ NĂNG CHUYÊN MÔN</div>
+                <div class="chips">
+                  {{ range . }}<span class="chip chip-accent">{{ . }}</span>{{ end }}
+                </div>
+              {{ end }}
+            </div>
+
+          </div>
+        </button>
+      </article>
+    {{ end }}
+  </div>
+
+</section>
+{{ end }}

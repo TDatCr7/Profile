@@ -1,0 +1,30 @@
+{{ define "main" }}
+<section class="projects-wrap enter">
+  <header class="surface-soft projects-hero">
+    <p class="kicker">PROJECTS</p>
+    <h1 class="headline">{{ .Title }}</h1>
+    {{ with .Params.subtitle }}<p class="subtitle">{{ . }}</p>{{ end }}
+  </header>
+
+  <div class="projects-grid">
+    {{ range .Pages.ByDate.Reverse }}
+      <a class="surface-soft proj-card" data-nav href="{{ .RelPermalink }}">
+        <div class="proj-title">{{ .Title }}</div>
+
+        {{/* Cinema: hiện GV + thời gian */}}
+        {{ if eq .Params.projectType "cinema" }}
+          <div class="proj-meta">
+            <b>GVHD:</b> {{ .Params.instructor }}<br/>
+            <b>Thời gian:</b> {{ .Params.from }} – {{ .Params.to }}
+          </div>
+        {{ else }}
+          {{/* Course (Lập trình mạng): hiện GV */}}
+          <div class="proj-meta">
+            <b>Giảng viên:</b> {{ with .Params.instructor }}{{ . }}{{ else }}[Chưa có]{{ end }}
+          </div>
+        {{ end }}
+      </a>
+    {{ end }}
+  </div>
+</section>
+{{ end }}

@@ -1,0 +1,28 @@
+{{ define "main" }}
+<section class="projects-wrap enter">
+
+  <header class="projects-hero surface-soft">
+    <p class="page-kicker">LEARNINGS</p>
+    <h1 class="headline page-title">{{ .Title }}</h1>
+    {{ with .Params.instructor }}<p class="subtitle page-subtitle">Giảng viên: {{ . }}</p>{{ end }}
+  </header>
+
+  <div class="lessons-grid">
+    {{ $defaultTeacher := .Params.instructor }}
+    {{ range .Params.lessons }}
+      <article class="lesson-card surface-soft">
+        <div class="lesson-title">{{ .title }}</div>
+        <div class="lesson-main">{{ .main }}</div>
+
+
+        {{ with .tags }}
+          <div class="chips lesson-chips">
+            {{ range . }}<span class="chip chip-accent">#{{ . }}</span>{{ end }}
+          </div>
+        {{ end }}
+      </article>
+    {{ end }}
+  </div>
+
+</section>
+{{ end }}

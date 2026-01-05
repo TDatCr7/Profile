@@ -1,0 +1,90 @@
+{{ define "main" }}
+<section class="contact-wrap enter">
+
+  <div class="contact-grid">
+
+    <!-- LEFT: info -->
+    <aside class="contact-card surface-soft">
+      <p class="kicker">THÔNG TIN</p>
+
+      <div class="fact-list">
+        {{ with .Params.email }}
+        <div class="fact-row">
+          <b>Email</b>
+          <span><a href="mailto:{{ . }}">{{ . }}</a></span>
+        </div>
+        {{ end }}
+
+        {{ with .Params.phone }}
+        <div class="fact-row">
+          <b>Phone</b>
+          <span><a href="tel:{{ . }}">{{ . }}</a></span>
+        </div>
+        {{ end }}
+
+        {{ with .Params.location }}
+        <div class="fact-row">
+          <b>Location</b>
+          <span>{{ . }}</span>
+        </div>
+        {{ end }}
+      </div>
+
+      {{ with .Params.email }}
+      <div class="contact-actions">
+        <button class="btn btn-grad" type="button" data-copy-email="{{ . }}">Copy Email</button>
+      </div>
+      {{ end }}
+
+      <p class="contact-hint" data-contact-status aria-live="polite"></p>
+    </aside>
+
+    <!-- RIGHT: form -->
+    <div class="contact-card surface-soft">
+      <p class="kicker">GỬI TIN NHẮN</p>
+
+      <form
+        class="contact-form"
+        data-contact-form
+        data-to="{{ .Params.email }}"
+        data-service="{{ with .Params.emailjs }}{{ .service_id }}{{ end }}"
+        data-template="{{ with .Params.emailjs }}{{ .template_id }}{{ end }}"
+        data-public="{{ with .Params.emailjs }}{{ .public_key }}{{ end }}"
+      >
+        <!-- recipient: dùng trong EmailJS template -->
+        <input type="hidden" name="to_email" value="{{ .Params.email }}"/>
+
+        <div class="contact-row">
+          <label class="contact-field">
+            <span>Họ tên</span>
+            <input name="name" type="text" autocomplete="name" required />
+          </label>
+
+          <label class="contact-field">
+            <span>Email</span>
+            <input name="email" type="email" autocomplete="email" required />
+          </label>
+        </div>
+
+        <label class="contact-field">
+          <span>Subject</span>
+          <!-- EmailJS tutorial dùng name="title" cho Subject -->
+          <input name="title" type="text" required />
+        </label>
+
+        <label class="contact-field">
+          <span>Nội dung</span>
+          <textarea name="message" rows="6" required></textarea>
+        </label>
+
+        <div class="contact-actions">
+          <button class="btn btn-grad" type="submit">Gửi</button>
+        </div>
+
+        <p class="contact-hint" data-contact-hint aria-live="polite"></p>
+      </form>
+    </div>
+
+  </div>
+</section>
+{{ end }}

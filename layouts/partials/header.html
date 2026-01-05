@@ -1,0 +1,44 @@
+<header class="site-header">
+  <div class="island" role="navigation" aria-label="Primary">
+    <a class="island-brand" data-nav href='{{ "" | relURL }}'>Home</a>
+
+    <div class="island-sep" aria-hidden="true"></div>
+
+    <nav class="island-nav">
+      <a data-nav href='{{ "about/" | relURL }}'>About</a>
+      <a data-nav href='{{ "certificate/" | relURL }}'>Certificate</a>
+      <a data-nav href='{{ "projects/" | relURL }}'>Projects</a>
+      <a data-nav href='{{ "contact/" | relURL }}'>Contact</a>
+    </nav>
+
+    <div class="island-sep" aria-hidden="true"></div>
+
+    <button class="music-pill" type="button" id="musicToggle" aria-pressed="false" title="Play/Pause">
+      <span class="music-icon" id="musicIcon" aria-hidden="true">▶</span>
+      <span class="music-title">
+        {{ with site.Home.Params.songTitle }}{{ . }}{{ else }}Hào Khí Việt Nam{{ end }}
+      </span>
+      <span class="eq" aria-hidden="true">
+        <span class="bar b1"></span>
+        <span class="bar b2"></span>
+        <span class="bar b3"></span>
+        <span class="bar b4"></span>
+      </span>
+    </button>
+
+    <audio id="bgm" preload="auto" loop>
+      <source
+        src='{{ with site.Home.Params.songSrc }}{{ . | relURL }}{{ else }}{{ "audio/haokhiVN.mp3" | relURL }}{{ end }}'
+        type="audio/mpeg"
+      />
+    </audio>
+
+    <button class="theme-pill" type="button" id="themeToggle" aria-pressed="false" title="Theme">
+      <span class="theme-ico" id="themeIcon" aria-hidden="true">🌙</span>
+    </button>
+    <button class="theme-pill" type="button" id="snowToggle" aria-pressed="false" title="Snow">
+      <span class="theme-ico" id="snowIcon" aria-hidden="true">❄️</span>
+    </button>
+
+  </div>
+</header>

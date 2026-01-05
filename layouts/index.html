@@ -1,0 +1,36 @@
+{{ define "main" }}
+<section class="home enter">
+  <!-- LEFT: ảnh + nhạc -->
+  <div class="home-left">
+    <div class="portrait-card floaty">
+      <div class="portrait-frame">
+        <img
+          class="portrait-img"
+          src='{{ "img/avatar.jpg" | relURL }}'
+          alt="Portrait"
+          loading="eager"
+        />
+      </div>
+
+      
+    </div>
+  </div>
+
+  <!-- RIGHT: chữ lấy từ front-matter -->
+  <div class="home-right">
+    <div class="text-panel">
+      {{ with .Params.heroKicker }}
+        <p class="kicker">{{ . }}</p>
+      {{ end }}
+
+      {{ with .Params.heroTitle }}
+        <h1 class="headline">{{ . }}</h1>
+      {{ end }}
+
+      {{ with .Params.heroSubtitle }}
+        <p class="subtitle">{{ . }}</p>
+      {{ end }}
+    </div>
+  </div>
+</section>
+{{ end }}

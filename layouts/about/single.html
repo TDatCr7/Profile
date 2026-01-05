@@ -1,0 +1,195 @@
+{{ define "main" }}
+<section class="about-wrap enter">
+
+  <!-- HERO -->
+  <header class="about-card about-hero">
+    <div class="about-hero-media">
+      <!-- Avatar: ảnh đại diện của bạn -->
+      <div class="about-avatar" title="Avatar">
+        <img
+          src='{{ with .Params.avatar }}{{ . | relURL }}{{ else }}{{ "img/avatar2.jpg" | relURL }}{{ end }}'
+          alt="Avatar"
+          loading="eager"
+        />
+      </div>
+
+      <div class="about-hero-text">
+        <!-- About: nhãn section (kicker) -->
+        <p class="about-kicker">About</p>
+
+        <!-- Title: tên của bạn / tiêu đề trang about -->
+        <h1 class="headline about-title">{{ .Title }}</h1>
+
+        <!-- Summary: 2–4 câu giới thiệu (bạn là ai, đang làm gì, điểm mạnh) -->
+        {{ with .Params.summary }}
+          <p class="subtitle about-summary">{{ . }}</p>
+        {{ else }}
+          <p class="subtitle about-summary">
+            [SUMMARY_2_4_SENTENCES: 2–4 câu giới thiệu ngắn. Gợi ý: vai trò hiện tại, lĩnh vực quan tâm, thế mạnh, mục tiêu gần.]
+          </p>
+        {{ end }}
+
+        <!-- Role: chức danh ngắn (vd: Backend Developer / Mobile Dev / Student - IT) -->
+        {{ with .Params.role }}
+          <span class="role-pill">{{ . }}</span>
+        {{ else }}
+          <span class="role-pill">[ROLE_TITLE: chức danh/vai trò ngắn]</span>
+        {{ end }}
+      </div>
+    </div>
+  </header>
+
+  <div class="about-grid">
+
+    <!-- LEFT -->
+    <div class="about-col">
+
+      <section class="about-card">
+        <!-- Story: câu chuyện/tiểu sử ngắn (động lực, hành trình) -->
+        <p class="about-kicker">{{ with .Params.sectionStoryTitle }}{{ . }}{{ else }}Story{{ end }}</p>
+
+        {{ with .Params.story }}
+          <div class="prose about-prose">{{ . | markdownify }}</div>
+        {{ else }}
+          <div class="prose about-prose">
+            <p>[PARA_1: bạn bắt đầu học/làm IT từ đâu, lý do chọn hướng này]</p>
+            <p>[PARA_2: bạn đang tập trung cải thiện gì, phong cách làm việc, giá trị bạn theo đuổi]</p>
+          </div>
+        {{ end }}
+      </section>
+
+      <section class="about-card">
+        <!-- Experience: mốc thời gian dự án/kinh nghiệm -->
+        <p class="about-kicker">{{ with .Params.sectionTimelineTitle }}{{ . }}{{ else }}Experience{{ end }}</p>
+
+        <div class="exp-list">
+          {{ range .Params.timeline }}
+            <article class="exp-item">
+              <div class="exp-top">
+                <div>
+                  <!-- when: thời gian (vd: 2024–Now) -->
+                  <div style="font-weight:700;">{{ .when }}</div>
+                  <!-- desc: 1–2 dòng mô tả tác động/kết quả -->
+                  {{ with .desc }}<div class="exp-meta">{{ . }}</div>{{ end }}
+                </div>
+                <!-- title: vai trò — tổ chức / tên dự án -->
+                <div style="font-weight:750;">{{ .title }}</div>
+              </div>
+
+              <!-- tags: công nghệ/kỹ năng dùng trong mốc này -->
+              {{ with .tags }}
+                <div class="chips">
+                  {{ range . }}<span class="chip">{{ . }}</span>{{ end }}
+                </div>
+              {{ end }}
+            </article>
+          {{ else }}
+            <article class="exp-item">
+              <div class="exp-top">
+                <div>
+                  <div style="font-weight:700;">[TIME_RANGE: thời gian]</div>
+                  <div class="exp-meta">[IMPACT: 1–2 dòng nêu kết quả/đóng góp, ví dụ: cải thiện hiệu năng, hoàn thiện tính năng, học được gì]</div>
+                </div>
+                <div style="font-weight:750;">[POSITION/PROJECT] — [ORG/SCHOOL]</div>
+              </div>
+
+              <div class="chips">
+                <span class="chip">[TAG_1: tech]</span>
+                <span class="chip">[TAG_2: tech]</span>
+              </div>
+            </article>
+          {{ end }}
+        </div>
+      </section>
+
+      {{ if .Content }}
+        <section class="about-card">
+          <!-- More: phần markdown tự do (chứng chỉ, giải thưởng, hoạt động, sở thích liên quan) -->
+          <p class="about-kicker">{{ with .Params.sectionMoreTitle }}{{ . }}{{ else }}More{{ end }}</p>
+          <div class="prose">{{ .Content }}</div>
+        </section>
+      {{ end }}
+
+    </div>
+
+    <!-- RIGHT -->
+    <aside class="about-col">
+
+      <section class="about-card">
+        <!-- Quick facts: thông tin nhanh để người xem nắm ngay -->
+        <p class="about-kicker">{{ with .Params.sectionFactsTitle }}{{ . }}{{ else }}Quick facts{{ end }}</p>
+
+        <div class="fact-list">
+          {{ range .Params.facts }}
+            <div class="fact-row">
+              <!-- k: nhãn (Location/Email/...) -->
+              <b>{{ .k }}</b>
+              <!-- v: giá trị -->
+              <span>{{ .v }}</span>
+            </div>
+          {{ else }}
+            <div class="fact-row"><b>Location</b><span>[CITY, COUNTRY: nơi ở/làm việc]</span></div>
+            <div class="fact-row"><b>Email</b><span>[EMAIL: email liên hệ]</span></div>
+            <div class="fact-row"><b>Focus</b><span>[FOCUS: lĩnh vực tập trung (VD: Backend, Mobile, AI)]</span></div>
+            <div class="fact-row"><b>Open to</b><span>[OPEN_TO: thực tập/freelance/fulltime]</span></div>
+          {{ end }}
+        </div>
+      </section>
+
+      <section class="about-card">
+        <!-- Tech stack: công nghệ chính bạn dùng tốt -->
+        <p class="about-kicker">{{ with .Params.sectionStackTitle }}{{ . }}{{ else }}Tech stack{{ end }}</p>
+
+        <div class="chips">
+          {{ range .Params.stack }}
+            <span class="chip chip-accent">{{ . }}</span>
+          {{ else }}
+            <span class="chip chip-accent">[LANG: ngôn ngữ]</span>
+            <span class="chip chip-accent">[FRAMEWORK: framework]</span>
+            <span class="chip chip-accent">[DB: database]</span>
+            <span class="chip chip-accent">[TOOLING: tool/devops]</span>
+          {{ end }}
+        </div>
+      </section>
+
+      <section class="about-card">
+        <!-- Now: hiện tại đang làm gì (3 gạch đầu dòng) -->
+        <p class="about-kicker">{{ with .Params.sectionNowTitle }}{{ . }}{{ else }}Now{{ end }}</p>
+
+        <ul class="now-list" style="margin:0; padding-left:18px;">
+          {{ range .Params.now }}
+            <li>{{ . }}</li>
+          {{ else }}
+            <li>[NOW_ITEM_1: đang học/đang làm project gì]</li>
+            <li>[NOW_ITEM_2: đang cải thiện kỹ năng nào]</li>
+            <li>[NOW_ITEM_3: mục tiêu 1–3 tháng tới]</li>
+          {{ end }}
+        </ul>
+      </section>
+
+      <section class="about-card">
+        <!-- Contact: lời kêu gọi liên hệ + nút -->
+        <p class="about-kicker">{{ with .Params.sectionCtaTitle }}{{ . }}{{ else }}Contact{{ end }}</p>
+
+        {{ with .Params.ctaText }}
+          <p class="subtitle" style="margin:0 0 12px;">{{ . }}</p>
+        {{ else }}
+          <p class="subtitle" style="margin:0 0 12px;">
+            [CTA_TEXT: 1 câu ngắn mời liên hệ (VD: "Liên hệ nếu bạn muốn hợp tác/dự án/đề nghị thực tập")]
+          </p>
+        {{ end }}
+
+        <div class="home-cta">
+          <a class="btn btn-grad" href='{{ "contact/" | relURL }}'>Contact</a>
+          {{ with .Params.cvUrl }}
+            <a class="btn" href='{{ . | relURL }}'>CV</a>
+          {{ else }}
+            <a class="btn" href="#">[CV_LINK: link tới CV/PDF]</a>
+          {{ end }}
+        </div>
+      </section>
+
+    </aside>
+  </div>
+</section>
+{{ end }}
