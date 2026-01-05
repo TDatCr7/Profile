@@ -2311,3 +2311,59 @@ a {
   background: var(--surface-inset);
   box-shadow: var(--shadow-sm);
 }
+
+/* =========================
+   MOBILE: island gọn 1 dòng (không wrap)
+   DÁN CUỐI static/css/style.css
+   ========================= */
+
+/* island không xuống dòng */
+@media (max-width: 720px) {
+  .island {
+    flex-wrap: nowrap !important;
+    gap: 10px !important;
+    padding: 10px 10px !important;
+  }
+
+  /* nếu island-actions đang wrap làm tăng chiều cao */
+  .island-actions {
+    flex-wrap: nowrap !important;
+    gap: 10px !important;
+  }
+
+  /* giữ kích thước nút cố định để không bị đẩy xuống */
+  .theme-pill,
+  .music-pill,
+  .mob-burger {
+    flex: 0 0 auto !important;
+  }
+
+  /* Home ở giữa không bị kéo giãn */
+  .mob-home {
+    min-width: 0 !important;
+    max-width: 44vw !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+    justify-self: center !important;
+  }
+
+  /* Ẩn text dài trong music pill trên mobile (chỉ giữ icon + eq) */
+  .music-title {
+    display: none !important;
+  }
+
+  /* nếu music-pill quá dài do padding */
+  .music-pill {
+    padding: 0 10px !important;
+  }
+
+  /* nếu eq làm rộng quá, cho nhỏ lại */
+  .eq {
+    gap: 3px !important;
+  }
+
+  .eq .bar {
+    width: 3px !important;
+  }
+}
