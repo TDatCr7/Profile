@@ -1,12 +1,4 @@
-/* =========================
-   CLEAN STYLE.CSS (đã dọn override + bỏ phần lặp)
-   - Giữ token + layout bạn đang dùng
-   - Fix header không làm mờ nội dung
-   - Fix headline không bị cắt + không bị “mất chữ”
-   - Certificate: hover overlay nằm TRÊN ảnh, click mở viewer full màn hình (X để đóng)
-   ========================= */
-
-@import url("background.css");
+@import url("happynewyearbr.css");
 
 /* =========================
    TOKENS
