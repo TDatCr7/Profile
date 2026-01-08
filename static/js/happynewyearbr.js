@@ -415,6 +415,68 @@
         requestAnimationFrame(syncNyPos);
         window.addEventListener("resize", () => requestAnimationFrame(syncNyPos), { passive: true });
         window.addEventListener("orientationchange", () => requestAnimationFrame(syncNyPos), { passive: true });
+        /* THÊM VÀO static/js/happynewyearbr.js
+Vị trí: trong function boot(), sau đoạn syncNyPos() (hoặc sau applyTheme(); đều được)
+*/
+        function mobileHeaderAutoHide() {
+            const mq = window.matchMedia("(max-width: 720px)");
+            const header = document.querySelector(".site-header");
+            const ny = document.querySelector(".tet-ny-text");
+            if (!header || !ny) return;
+
+            let lastY = window.pageYOffset || 0;
+            let ticking = false;
+
+            const DEAD = 8;        // chống rung
+            const HIDE_AFTER = 30; // chỉ bắt đầu ẩn sau 70px
+
+            function apply() {
+                const isMobile = mq.matches;
+                const y = window.pageYOffset || 0;
+
+                if (!isMobile) {
+                    header.classList.remove("is-scroll-hide");
+                    ny.classList.remove("is-scroll-hide");
+                    lastY = y;
+                    return;
+                }
+
+                const dy = y - lastY;
+
+                if (Math.abs(dy) >= DEAD) {
+                    if (dy > 0 && y > HIDE_AFTER) {
+                        header.classList.add("is-scroll-hide");
+                        ny.classList.add("is-scroll-hide");
+                    } else if (dy < 0) {
+                        header.classList.remove("is-scroll-hide");
+                        ny.classList.remove("is-scroll-hide");
+                    }
+                    lastY = y;
+                }
+
+                if (y < 10) {
+                    header.classList.remove("is-scroll-hide");
+                    ny.classList.remove("is-scroll-hide");
+                }
+            }
+
+            window.addEventListener("scroll", () => {
+                if (ticking) return;
+                ticking = true;
+                requestAnimationFrame(() => {
+                    ticking = false;
+                    apply();
+                });
+            }, { passive: true });
+
+            window.addEventListener("resize", () => requestAnimationFrame(apply), { passive: true });
+            window.addEventListener("orientationchange", () => requestAnimationFrame(apply), { passive: true });
+
+            apply();
+        }
+
+
+        mobileHeaderAutoHide();
 
         window.addEventListener("resize", function () {
             petals.resize();

@@ -1,11 +1,11 @@
 /* static/css/happynewyearbr.css
-   TET BACKGROUND v2: Light (hoa rơi mượt) + Dark (pháo hoa lớn + sao + banner)
-   Requires: <div class="tet-fx" aria-hidden="true"></div>
-*/
-
+/* =========================================================
+   BASE / LAYER SAFETY
+   ========================================================= */
 html,
 body {
     height: 100%;
+    position: relative;
 }
 
 body {
@@ -13,25 +13,58 @@ body {
     overflow-x: hidden;
 }
 
-/* FX root */
+/* FX root: luôn là nền (không che UI) */
 .tet-fx {
     position: fixed;
     inset: 0;
     pointer-events: none;
-    z-index: -1;
-    /* đang chạy OK trong dự án bạn */
+    z-index: 0;
+    /* nền */
+    overflow: hidden;
 }
 
 /* canvases */
-.tet-fx canvas {
+.tet-fx canvas,
+#tetFireworks {
     position: absolute;
     inset: 0;
     width: 100%;
     height: 100%;
     display: block;
+    background: transparent !important;
 }
 
-/* ===== LIGHT THEME (màu xuân: vàng mai + hồng đào, dịu) ===== */
+/* UI luôn ở trên hiệu ứng */
+.site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+}
+
+#appMain,
+main,
+.container,
+.site-footer,
+.home,
+.about-wrap,
+.certs-wrap,
+.projects-wrap,
+.contact-wrap,
+.cinema-wrap {
+    position: relative;
+    z-index: 2;
+}
+
+/* Reduce motion */
+@media (prefers-reduced-motion:reduce) {
+    .tet-fx {
+        display: none;
+    }
+}
+
+/* =========================================================
+   LIGHT THEME (hoa rơi / nền xuân dịu)
+   ========================================================= */
 :root[data-theme="light"] body {
     background:
         radial-gradient(1200px 820px at 18% 18%, rgba(255, 215, 90, .62), transparent 62%),
@@ -54,15 +87,19 @@ body {
     opacity: .62;
 }
 
+/* show petals, hide fireworks */
 :root[data-theme="light"] .tet-fx .tet-petals {
     opacity: 1;
 }
 
-:root[data-theme="light"] .tet-fx .tet-fireworks {
+:root[data-theme="light"] .tet-fx .tet-fireworks,
+:root[data-theme="light"] #tetFireworks {
     opacity: 0;
 }
 
-/* ===== DARK THEME (đêm giao thừa: sao + pháo hoa) ===== */
+/* =========================================================
+   DARK THEME (sao + pháo hoa)
+   ========================================================= */
 :root:not([data-theme="light"]) body {
     background:
         radial-gradient(1200px 900px at 18% 18%, rgba(255, 70, 140, .18), transparent 62%),
@@ -71,7 +108,7 @@ body {
         linear-gradient(180deg, #040510 0%, #070a1a 46%, #0b1020 100%);
 }
 
-/* sao nhiều hơn (CSS) */
+/* sao nền (dark) */
 :root:not([data-theme="light"]) body::after {
     content: "";
     position: fixed;
@@ -107,47 +144,9 @@ body {
     }
 }
 
-/* banner chữ giữa màn hình (chỉ dark) */
-:root:not([data-theme="light"]) .tet-fx::before {
-    content: "HAPPY NEW YEAR";
-    position: absolute;
-    left: 50%;
-    top: 40%;
-    transform: translate(-50%, -50%);
-    letter-spacing: .22em;
-    font-weight: 900;
-    font-size: clamp(28px, 4.4vw, 64px);
-    white-space: nowrap;
-
-    color: rgba(255, 255, 255, .92);
-    text-shadow:
-        0 0 18px rgba(255, 255, 255, .35),
-        0 0 44px rgba(80, 160, 255, .22),
-        0 0 52px rgba(255, 70, 140, .22);
-    opacity: .92;
-    z-index: 1;
-}
-
-/* glow nền sau chữ */
-:root:not([data-theme="light"]) .tet-fx::after {
-    content: "";
-    position: absolute;
-    left: 50%;
-    top: 40%;
-    width: min(780px, 92vw);
-    height: 220px;
-    transform: translate(-50%, -50%);
-    background:
-        radial-gradient(closest-side, rgba(255, 255, 255, .18), transparent 70%),
-        radial-gradient(closest-side, rgba(80, 160, 255, .14), transparent 72%),
-        radial-gradient(closest-side, rgba(255, 70, 140, .12), transparent 74%);
-    filter: blur(16px);
-    opacity: .85;
-    z-index: 0;
-}
-
-/* fireworks canvas sáng hơn + nổi hơn */
-:root:not([data-theme="light"]) .tet-fx .tet-fireworks {
+/* fireworks nổi hơn, petals tắt */
+:root:not([data-theme="light"]) .tet-fx .tet-fireworks,
+:root:not([data-theme="light"]) #tetFireworks {
     opacity: .55;
     mix-blend-mode: screen;
 }
@@ -156,516 +155,76 @@ body {
     opacity: 0;
 }
 
-/* reduce motion */
-@media (prefers-reduced-motion: reduce) {
-    .tet-fx {
-        display: none;
-    }
-}
-
-/* =========================
-   TẾT - NIGHT UPGRADE
-   - chữ góc trái trên
-   - sao lấp lánh
-   - canvas pháo hoa (JS)
-   ========================= */
-
-/* lớp hiệu ứng */
-.tet-fx {
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    z-index: 10;
-    /* dưới header (50), trên background */
-    overflow: hidden;
-}
-
-/* canvas pháo hoa */
-#tetFireworks {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    display: block;
-}
-
-/* sao nền: rẻ, mượt */
-:root:not([data-theme="light"]) .tet-fx::before {
-    content: "";
-    position: absolute;
-    inset: -10vmax;
-    background:
-        radial-gradient(1px 1px at 12% 18%, rgba(255, 255, 255, .45), transparent 60%),
-        radial-gradient(1px 1px at 22% 62%, rgba(255, 255, 255, .35), transparent 60%),
-        radial-gradient(1px 1px at 35% 28%, rgba(255, 255, 255, .40), transparent 60%),
-        radial-gradient(1px 1px at 55% 44%, rgba(255, 255, 255, .30), transparent 60%),
-        radial-gradient(1px 1px at 72% 22%, rgba(255, 255, 255, .40), transparent 60%),
-        radial-gradient(1px 1px at 84% 54%, rgba(255, 255, 255, .28), transparent 60%),
-        radial-gradient(1px 1px at 92% 30%, rgba(255, 255, 255, .36), transparent 60%);
-    opacity: .55;
-    filter: blur(.2px);
-    animation: tetStarTwinkle 6.8s ease-in-out infinite;
-}
-
-@keyframes tetStarTwinkle {
-
-    0%,
-    100% {
-        opacity: .42;
-    }
-
-    50% {
-        opacity: .70;
-    }
-}
-
-/* chữ HAPPY NEW YEAR: chuyển sang góc trái trên */
+/* =========================================================
+   HAPPY NEW YEAR TEXT (1 bản duy nhất)
+   - luôn là nền: dưới UI (z-index:1)
+   - light: có stroke để không chìm
+   - dark: hue + pulse
+   ========================================================= */
 .tet-ny-text {
     position: fixed;
-    left: 18px;
-    top: 88px;
-    /* dưới island header */
-    z-index: 12;
-    text-transform: uppercase;
-    letter-spacing: .20em;
-    font-weight: 950;
-    line-height: 0.98;
-
-    /* neon glow */
-    filter: drop-shadow(0 10px 30px rgba(0, 0, 0, .45)) drop-shadow(0 0 18px rgba(255, 215, 120, .26));
-    mix-blend-mode: screen;
-    opacity: .95;
-}
-
-.tet-ny-line1 {
-    font-size: clamp(16px, 2.2vw, 26px);
-    color: rgba(255, 236, 190, .95);
-}
-
-.tet-ny-line2 {
-    margin-top: 6px;
-    font-size: clamp(28px, 4.6vw, 58px);
-    background: linear-gradient(90deg,
-            rgba(255, 210, 120, 1),
-            rgba(255, 80, 120, 1),
-            rgba(120, 200, 255, 1),
-            rgba(200, 140, 255, 1));
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-}
-
-/* mobile: đẩy xuống thêm chút */
-@media (max-width: 720px) {
-    .tet-ny-text {
-        top: 78px;
-        left: 14px;
-        letter-spacing: .16em;
-    }
-}
-
-/* ===== HAPPY NEW YEAR: luôn hiện (ngày + đêm), góc trái, chớp nhiều màu ===== */
-.tet-ny-text {
-    position: fixed;
-    left: 18px;
-    top: 88px;
-    z-index: 12;
+    left: 16px;
+    top: 16px;
+    z-index: 1;
+    /* dưới UI (2), dưới header (50) */
     pointer-events: none;
+    mix-blend-mode: normal;
 
     text-transform: uppercase;
-    font-weight: 950;
-    letter-spacing: .20em;
-    line-height: .98;
-
-    /* nhấp nháy màu + glow */
-    animation: nyHue 2.2s linear infinite, nyPulse 1.4s ease-in-out infinite;
-    filter: drop-shadow(0 10px 30px rgba(0, 0, 0, .30));
-    opacity: .98;
-}
-
-.tet-ny-line1 {
-    font-size: clamp(16px, 2.2vw, 26px);
-    color: rgba(255, 255, 255, .92);
-}
-
-.tet-ny-line2 {
-    margin-top: 6px;
-    font-size: clamp(28px, 4.6vw, 58px);
-    background: linear-gradient(90deg,
-            rgba(255, 210, 120, 1),
-            rgba(255, 80, 120, 1),
-            rgba(120, 200, 255, 1),
-            rgba(200, 140, 255, 1),
-            rgba(120, 255, 190, 1));
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-}
-
-/* đổi hue toàn khối để “nhiều màu” */
-@keyframes nyHue {
-    0% {
-        filter: hue-rotate(0deg) drop-shadow(0 0 10px rgba(255, 200, 120, .35)) drop-shadow(0 0 22px rgba(120, 200, 255, .22));
-    }
-
-    50% {
-        filter: hue-rotate(160deg) drop-shadow(0 0 12px rgba(255, 80, 120, .32)) drop-shadow(0 0 26px rgba(200, 140, 255, .22));
-    }
-
-    100% {
-        filter: hue-rotate(360deg) drop-shadow(0 0 10px rgba(255, 200, 120, .35)) drop-shadow(0 0 22px rgba(120, 200, 255, .22));
-    }
-}
-
-/* nhấp nháy sáng */
-@keyframes nyPulse {
-
-    0%,
-    100% {
-        opacity: .88;
-        transform: translateY(0);
-    }
-
-    50% {
-        opacity: 1;
-        transform: translateY(-1px);
-    }
-}
-
-@media (max-width: 720px) {
-    .tet-ny-text {
-        top: 78px;
-        left: 14px;
-        letter-spacing: .16em;
-    }
-}
-
-/* =========================
-   FIX: Fireworks không che nội dung
-   ========================= */
-
-/* tạo stacking context */
-html,
-body {
-    position: relative;
-}
-
-/* lớp hiệu ứng luôn ở dưới nội dung */
-.tet-fx {
-    position: fixed;
-    inset: 0;
-    z-index: 0;
-    /* nền hiệu ứng */
-    pointer-events: none;
-    /* không chặn click */
-}
-
-/* canvas fullscreen, trong suốt */
-#tetFireworks {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    display: block;
-    background: transparent !important;
-}
-
-/* đẩy mọi nội dung lên trên fireworks */
-.site-header,
-#appMain,
-main,
-.container,
-.site-footer {
-    position: relative;
-    z-index: 2;
-}
-
-/* chữ Happy New Year góc trái nằm trên cùng */
-.tet-ny-text {
-    position: fixed;
-    left: 18px;
-    top: 88px;
-    z-index: 60;
-    /* trên header + nội dung */
-    pointer-events: none;
-}
-
-@media (max-width: 720px) {
-    .tet-ny-text {
-        left: 14px;
-        top: 78px;
-    }
-}
-
-/* =========================
-   FIX LAYER: hiệu ứng nằm dưới nội dung
-   ========================= */
-html,
-body {
-    position: relative;
-}
-
-.tet-fx {
-    position: fixed;
-    inset: 0;
-    z-index: 0;
-    /* nền */
-    pointer-events: none;
-}
-
-/* 2 canvas v2 tạo ra */
-.tet-fx canvas {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    display: block;
-    background: transparent !important;
-}
-
-/* đẩy toàn bộ UI lên trên pháo hoa */
-.site-header,
-main,
-.container,
-.site-footer {
-    position: relative;
-    z-index: 2;
-}
-
-/* =========================
-   CARD RÕ HƠN khi nền pháo hoa (dark)
-   ========================= */
-:root:not([data-theme="light"]) {
-    --surface: rgba(10, 12, 24, .78);
-    --surface-1: rgba(0, 0, 0, .22);
-    --surface-2: rgba(0, 0, 0, .14);
-    --surface-inset: rgba(0, 0, 0, .18);
-}
-
-/* giảm “mờ” do blur quá mạnh nếu cần */
-:root:not([data-theme="light"]) .surface,
-:root:not([data-theme="light"]) .card,
-:root:not([data-theme="light"]) .surface-soft {
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-}
-
-.tet-ny-text {
-    position: fixed;
-    left: 18px;
-    top: 88px;
-    z-index: 60;
-    pointer-events: none;
-    font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial;
-    font-weight: 900;
-    letter-spacing: .06em;
-    text-transform: uppercase;
-}
-
-.tet-ny-line1 {
-    font-size: 18px;
-    opacity: .92;
-    color: rgba(255, 255, 255, .85);
-    text-shadow: 0 10px 30px rgba(0, 0, 0, .65);
-}
-
-.tet-ny-line2 {
-    font-size: 44px;
-    line-height: 1;
-    background: linear-gradient(90deg, #ffcf4a, #ff4d9d, #7c5cff, #2bd7ff, #68ff6a);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    filter: drop-shadow(0 14px 34px rgba(0, 0, 0, .55));
-    animation: tetGlow 2.2s linear infinite;
-}
-
-@keyframes tetGlow {
-    0% {
-        filter: drop-shadow(0 14px 34px rgba(0, 0, 0, .55)) brightness(1.00);
-    }
-
-    50% {
-        filter: drop-shadow(0 14px 34px rgba(0, 0, 0, .55)) brightness(1.20);
-    }
-
-    100% {
-        filter: drop-shadow(0 14px 34px rgba(0, 0, 0, .55)) brightness(1.00);
-    }
-}
-
-/* ===== NIGHT: làm card đặc hơn để không “xuyên” pháo hoa ===== */
-:root:not([data-theme="light"]) {
-    /* tăng độ đặc nền card */
-    --surface: rgba(10, 12, 24, .92);
-    --surface-1: rgba(10, 12, 24, .78);
-    --surface-2: rgba(10, 12, 24, .70);
-    --surface-inset: rgba(10, 12, 24, .76);
-
-    /* viền rõ hơn một chút */
-    --border: rgba(255, 255, 255, .16);
-}
-
-/* giảm cảm giác “kính mờ” để chữ rõ */
-:root:not([data-theme="light"]) .surface,
-:root:not([data-theme="light"]) .surface-soft,
-:root:not([data-theme="light"]) .surface-inset,
-:root:not([data-theme="light"]) .card,
-:root:not([data-theme="light"]) .text-panel,
-:root:not([data-theme="light"]) .portrait-card,
-:root:not([data-theme="light"]) .about-card,
-:root:not([data-theme="light"]) .cert-card,
-:root:not([data-theme="light"]) .projects-hero,
-:root:not([data-theme="light"]) .contact-card {
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
-}
-
-/* ===== HAPPY NEW YEAR 2026: luôn hiện, nằm ngang với island ===== */
-.tet-ny-text {
-    position: fixed;
-    left: 18px;
-    top: 18px;
-    /* ngang với island (đưa lên cao) */
-    z-index: 70;
-    /* cao hơn header (header ~50) */
-    pointer-events: none;
-
-    text-transform: uppercase;
-    font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial;
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
     font-weight: 950;
     letter-spacing: .18em;
     line-height: .98;
 
-    animation: nyHue 2.4s linear infinite, nyPulse 1.6s ease-in-out infinite;
+    transition: opacity .18s ease, transform .18s ease;
 }
 
-.tet-ny-line1 {
-    font-size: 14px;
-    color: rgba(255, 255, 255, .92);
-    text-shadow: 0 10px 26px rgba(0, 0, 0, .35);
-}
-
-.tet-ny-line2 {
-    margin-top: 4px;
-    font-size: 34px;
-    background: linear-gradient(90deg,
-            #ffcf4a, #ff4d9d, #7c5cff, #2bd7ff, #68ff6a);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-
-    filter: drop-shadow(0 14px 30px rgba(0, 0, 0, .40));
-}
-
-.tet-ny-year {
-    font-size: .62em;
-    letter-spacing: .12em;
-    margin-left: 10px;
-    position: relative;
-    top: -0.22em;
-    /* nhích lên nhẹ */
-}
-
-/* Nhấp nháy sáng + đổi màu */
-@keyframes nyHue {
-    0% {
-        filter:
-            hue-rotate(0deg) drop-shadow(0 0 10px rgba(255, 200, 120, .30)) drop-shadow(0 0 22px rgba(120, 200, 255, .18));
-    }
-
-    50% {
-        filter:
-            hue-rotate(160deg) drop-shadow(0 0 12px rgba(255, 80, 120, .28)) drop-shadow(0 0 26px rgba(200, 140, 255, .18));
-    }
-
-    100% {
-        filter:
-            hue-rotate(360deg) drop-shadow(0 0 10px rgba(255, 200, 120, .30)) drop-shadow(0 0 22px rgba(120, 200, 255, .18));
-    }
-}
-
-@keyframes nyPulse {
-
-    0%,
-    100% {
-        opacity: .88;
-        transform: translateY(0);
-    }
-
-    50% {
-        opacity: 1;
-        transform: translateY(-1px);
-    }
-}
-
-/* Mobile: hạ top chút để không đụng header */
-@media (max-width: 720px) {
-    .tet-ny-text {
-        left: 12px;
-        top: 14px;
-        letter-spacing: .14em;
-    }
-
-    .tet-ny-line2 {
-        font-size: 28px;
-    }
-}
-
-/* ===== TET TEXT: luôn hiện, tự đổi style theo theme ===== */
-.tet-ny-text {
-    position: fixed;
-    left: 18px;
-    top: 18px;
-    /* ngang island */
-    z-index: 70;
-    pointer-events: none;
-
-    text-transform: uppercase;
-    font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial;
-    font-weight: 950;
-    letter-spacing: .18em;
-    line-height: .98;
-}
-
-/* cấu trúc chữ */
 .tet-ny-line1 {
     font-size: 14px;
     margin-bottom: 4px;
+    font-weight: 950;
+    letter-spacing: .18em;
 }
 
 .tet-ny-line2 {
     font-size: 34px;
-}
-
-.tet-ny-year {
-    font-size: .62em;
+    font-weight: 950;
     letter-spacing: .12em;
-    margin-left: 10px;
-    position: relative;
-    top: -0.22em;
-}
 
-/* ===== LIGHT: nền sáng -> chữ phải có viền tối để thấy rõ ===== */
-:root[data-theme="light"] .tet-ny-line1 {
-    color: rgba(25, 25, 25, .92);
-    text-shadow:
-        0 1px 0 rgba(255, 255, 255, .85),
-        0 6px 18px rgba(0, 0, 0, .10);
-}
+    display: inline-flex;
+    align-items: baseline;
+    gap: 10px;
 
-:root[data-theme="light"] .tet-ny-line2 {
     background: linear-gradient(90deg, #ff8a00, #ff2d55, #6d28d9, #0284c7, #16a34a);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-
-    /* viền tối để không “chìm” trên nền sáng */
-    -webkit-text-stroke: 1px rgba(0, 0, 0, .22);
-    text-shadow: 0 10px 26px rgba(0, 0, 0, .12);
 }
 
-/* ===== DARK: neon + nhấp nháy ===== */
+.tet-ny-year {
+    font-size: .62em;
+    letter-spacing: .12em;
+    position: relative;
+    top: -0.22em;
+
+    background: inherit;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+/* Light text contrast */
+:root[data-theme="light"] .tet-ny-line1 {
+    color: rgba(25, 25, 25, .92);
+    text-shadow: 0 2px 0 rgba(255, 255, 255, .90), 0 10px 24px rgba(0, 0, 0, .12);
+}
+
+:root[data-theme="light"] .tet-ny-line2 {
+    -webkit-text-stroke: 1px rgba(0, 0, 0, .18);
+    text-shadow: 0 12px 28px rgba(0, 0, 0, .10);
+}
+
+/* Dark neon animation */
 :root:not([data-theme="light"]) .tet-ny-text {
     animation: nyHue 2.4s linear infinite, nyPulse 1.6s ease-in-out infinite;
 }
@@ -680,24 +239,20 @@ main,
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-
     filter: drop-shadow(0 14px 30px rgba(0, 0, 0, .40));
 }
 
 @keyframes nyHue {
     0% {
-        filter:
-            hue-rotate(0deg) drop-shadow(0 0 10px rgba(255, 200, 120, .30)) drop-shadow(0 0 22px rgba(120, 200, 255, .18));
+        filter: hue-rotate(0deg) drop-shadow(0 0 10px rgba(255, 200, 120, .30)) drop-shadow(0 0 22px rgba(120, 200, 255, .18));
     }
 
     50% {
-        filter:
-            hue-rotate(160deg) drop-shadow(0 0 12px rgba(255, 80, 120, .28)) drop-shadow(0 0 26px rgba(200, 140, 255, .18));
+        filter: hue-rotate(160deg) drop-shadow(0 0 12px rgba(255, 80, 120, .28)) drop-shadow(0 0 26px rgba(200, 140, 255, .18));
     }
 
     100% {
-        filter:
-            hue-rotate(360deg) drop-shadow(0 0 10px rgba(255, 200, 120, .30)) drop-shadow(0 0 22px rgba(120, 200, 255, .18));
+        filter: hue-rotate(360deg) drop-shadow(0 0 10px rgba(255, 200, 120, .30)) drop-shadow(0 0 22px rgba(120, 200, 255, .18));
     }
 }
 
@@ -715,119 +270,78 @@ main,
     }
 }
 
-/* mobile */
-@media (max-width: 720px) {
+/* hide helper (nếu JS thêm class) */
+.tet-ny-text.is-hide {
+    opacity: 0;
+    transform: translateY(-8px);
+}
+
+/* Mobile: đẩy xuống dưới island */
+@media (max-width:720px) {
     .tet-ny-text {
-        left: 12px;
-        top: 14px;
+        left: 14px;
+        top: calc(env(safe-area-inset-top) + 78px);
         letter-spacing: .14em;
     }
 
     .tet-ny-line2 {
-        font-size: 28px;
-    }
-}
-
-/* ===== FIX: HAPPY + 2026 luôn nhìn thấy (light + dark) ===== */
-
-/* luôn nằm ngang island */
-.tet-ny-text {
-    position: fixed !important;
-    left: 18px !important;
-    top: 18px !important;
-    z-index: 9999 !important;
-    pointer-events: none !important;
-}
-
-/* line 1: HAPPY */
-.tet-ny-line1 {
-    font-size: 14px !important;
-    font-weight: 950 !important;
-    letter-spacing: .18em !important;
-}
-
-/* line 2: NEW YEAR + 2026 */
-.tet-ny-line2 {
-    font-size: 34px !important;
-    font-weight: 950 !important;
-    letter-spacing: .12em !important;
-
-    /* để NEW YEAR ăn gradient */
-    background: linear-gradient(90deg, #ff8a00, #ff2d55, #6d28d9, #0284c7, #16a34a) !important;
-    -webkit-background-clip: text !important;
-    background-clip: text !important;
-    color: transparent !important;
-
-    /* quan trọng: cho span đứng cùng hàng */
-    display: inline-flex !important;
-    align-items: baseline !important;
-    gap: 10px !important;
-}
-
-/* FIX chính: span 2026 cũng phải tự ăn gradient (không bị trong suốt) */
-.tet-ny-year {
-    font-size: .62em !important;
-    position: relative !important;
-    top: -0.22em !important;
-
-    background: inherit !important;
-    /* lấy gradient từ parent */
-    -webkit-background-clip: text !important;
-    background-clip: text !important;
-    color: transparent !important;
-    /* hiện gradient */
-}
-
-/* ===== LIGHT: nền sáng -> tăng tương phản, bỏ blend-mode gây chìm ===== */
-:root[data-theme="light"] .tet-ny-text {
-    mix-blend-mode: normal !important;
-    filter: none !important;
-}
-
-:root[data-theme="light"] .tet-ny-line1 {
-    color: rgba(25, 25, 25, .92) !important;
-    text-shadow: 0 2px 0 rgba(255, 255, 255, .9), 0 10px 24px rgba(0, 0, 0, .12) !important;
-}
-
-:root[data-theme="light"] .tet-ny-line2 {
-    -webkit-text-stroke: 1px rgba(0, 0, 0, .18) !important;
-    text-shadow: 0 12px 28px rgba(0, 0, 0, .10) !important;
-}
-
-/* ===== DARK: neon nhẹ ===== */
-:root:not([data-theme="light"]) .tet-ny-line1 {
-    color: rgba(255, 255, 255, .92) !important;
-    text-shadow: 0 10px 26px rgba(0, 0, 0, .35) !important;
-}
-
-:root:not([data-theme="light"]) .tet-ny-line2 {
-    filter: drop-shadow(0 14px 30px rgba(0, 0, 0, .40)) !important;
-}
-
-/* ===== MOBILE: chữ luôn nằm DƯỚI island (tự theo chiều cao island) ===== */
-@media (max-width: 720px) {
-    .tet-ny-text {
-        left: 12px !important;
-
-        /* lấy từ JS: --island-bottom = island.getBoundingClientRect().bottom */
-        top: calc(var(--island-bottom, 72px) + 10px) !important;
-
-        /* để island luôn nằm trên chữ */
-        z-index: 40 !important;
-
-        max-width: calc(100vw - 24px);
-        letter-spacing: .10em !important;
-    }
-
-    .tet-ny-line1 {
-        font-size: 14px !important;
-    }
-
-    .tet-ny-line2 {
-        font-size: clamp(22px, 8vw, 30px) !important;
+        font-size: clamp(22px, 8vw, 30px);
     }
 
     .tet-ny-year {
         font-size: .95em;
     }
+}
+
+/* =========================================================
+   MOBILE: scroll hide header + ny text (1 bản duy nhất)
+   Lưu ý: ny text có animation => khi ẩn cần tắt animation để transform ăn chắc
+   ========================================================= */
+@media (max-width:720px) {
+    .site-header {
+        will-change: transform;
+        transition: transform .22s cubic-bezier(.2, .8, .2, 1);
+        transform: translate3d(0, 0, 0);
+    }
+
+    .tet-ny-text {
+        will-change: transform, opacity;
+        transition: transform .22s cubic-bezier(.2, .8, .2, 1), opacity .22s cubic-bezier(.2, .8, .2, 1);
+    }
+
+    .site-header.is-scroll-hide {
+        transform: translate3d(0, -120%, 0);
+    }
+
+    .tet-ny-text.is-scroll-hide {
+        opacity: 0;
+        transform: translate3d(0, -160%, 0);
+        animation: none !important;
+        /* tránh đè transform */
+    }
+}
+
+/* =========================================================
+   NIGHT: card rõ hơn khi nền fireworks (chỉ chỉnh token)
+   ========================================================= */
+:root:not([data-theme="light"]) {
+    --surface: rgba(10, 12, 24, .92);
+    --surface-1: rgba(10, 12, 24, .78);
+    --surface-2: rgba(10, 12, 24, .70);
+    --surface-inset: rgba(10, 12, 24, .76);
+    --border: rgba(255, 255, 255, .16);
+}
+
+:root:not([data-theme="light"]) .surface,
+:root:not([data-theme="light"]) .surface-soft,
+:root:not([data-theme="light"]) .surface-inset,
+:root:not([data-theme="light"]) .card,
+:root:not([data-theme="light"]) .text-panel,
+:root:not([data-theme="light"]) .portrait-card,
+:root:not([data-theme="light"]) .about-card,
+:root:not([data-theme="light"]) .cert-card,
+:root:not([data-theme="light"]) .projects-hero,
+:root:not([data-theme="light"]) .contact-card {
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
 }

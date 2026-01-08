@@ -51,7 +51,7 @@ timeline:
   - when: "[27/09/2025 - 25/12/2025]"
     title: "Leader"
     desc: "Thực hiện và hoàn thành đồ án chuyên ngành. Tiếp cận tốt đề tài hệ thống rạp phim."
-    tags: ["[C#", "JSON","CSS", "Bootstrap","ASP .NET", "SQL Server","Flutter/Dart"]
+    tags: ["C#", "JSON","CSS", "Bootstrap","ASP .NET", "SQL Server","Flutter/Dart"]
 
 now:
   - "Sinh viên năm tư chuẩn bị thực tập và ra trường"

@@ -3,7 +3,7 @@ title: "Contact"
 type: "contact"
 subtitle: "Liên hệ trực tiếp qua email hoặc gửi tin nhắn"
 email: "tiendatcr712@gmail.com"
-phone: "+84 0345974119"
+phone: "0345974119"
 location: "Ho Chi Minh City, Vietnam"
 facebook: "https://www.facebook.com/share/16VqWz4Sqd/"
 socials:
