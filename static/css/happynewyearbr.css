@@ -803,3 +803,28 @@ main,
 :root:not([data-theme="light"]) .tet-ny-line2 {
     filter: drop-shadow(0 14px 30px rgba(0, 0, 0, .40)) !important;
 }
+
+/* ===== MOBILE: đẩy chữ xuống dưới island để không đè ===== */
+@media (max-width: 720px) {
+    .tet-ny-text {
+        left: 12px !important;
+        /* nằm dưới island */
+        top: calc(18px + 64px + 10px) !important;
+    }
+
+    .tet-ny-line2 {
+        font-size: 28px !important;
+        letter-spacing: .10em !important;
+    }
+}
+
+/* fallback nếu island cao hơn (màn nhỏ / chữ to) */
+@media (max-width: 420px) {
+    .tet-ny-text {
+        top: calc(18px + 70px + 10px) !important;
+    }
+
+    .tet-ny-line2 {
+        font-size: 24px !important;
+    }
+}
