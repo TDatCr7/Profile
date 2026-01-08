@@ -402,6 +402,19 @@
 
         const mo = new MutationObserver(applyTheme);
         mo.observe(rootEl, { attributes: true, attributeFilter: ["data-theme"] });
+        // THÊM vào static/js/happynewyearbr.js (trong function boot(), sau applyTheme();)
+        function syncNyPos() {
+            const island = document.querySelector(".site-header .island");
+            if (!island) return;
+
+            const r = island.getBoundingClientRect();
+            const bottom = Math.max(0, Math.round(r.bottom));
+            document.documentElement.style.setProperty("--island-bottom", bottom + "px");
+        }
+
+        requestAnimationFrame(syncNyPos);
+        window.addEventListener("resize", () => requestAnimationFrame(syncNyPos), { passive: true });
+        window.addEventListener("orientationchange", () => requestAnimationFrame(syncNyPos), { passive: true });
 
         window.addEventListener("resize", function () {
             petals.resize();
