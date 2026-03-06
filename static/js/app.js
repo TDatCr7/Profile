@@ -314,7 +314,7 @@
       }
     }
 
-    document.addEventListener("click", async function (ev) {
+    document.addEventListener("click", function (ev) {
       const a = ev.target && ev.target.closest ? ev.target.closest("a") : null;
       if (!shouldHandleLink(a)) return;
 
@@ -325,10 +325,13 @@
 
       if (isAboutPath(u.pathname)) {
         safeSSSet(SS_ABOUT_CLICK, "1");
-        await playNow("about");
+
+        // Gọi play trong user gesture, nhưng KHÔNG await
+        playNow("about").catch(() => { });
       }
 
-      await loadPage(u.href, { push: true });
+      // Luôn chuyển trang ngay, không chờ audio
+      loadPage(u.href, { push: true });
     });
 
     window.addEventListener("popstate", function () {
@@ -339,7 +342,7 @@
     const clicked = safeSSGet(SS_ABOUT_CLICK, "0") === "1";
     if (isAboutPath(p) && clicked) {
       safeSSDel(SS_ABOUT_CLICK);
-      playNow("about");
+      playNow("about").catch(() => { });
     }
   }
 
@@ -512,17 +515,28 @@
       musicIcon.textContent = isPlaying ? "⏸" : "▶";
     }
 
-    async function playNow(markStartedBy) {
-      if (!audio) { setMusicUI(false); return false; }
-      try {
-        await audio.play();
-        setMusicUI(true);
-        if (markStartedBy) startedBy = markStartedBy;
-        return true;
-      } catch (_) {
+    function playNow(markStartedBy) {
+      if (!audio) {
         setMusicUI(false);
-        return false;
+        return Promise.resolve(false);
       }
+
+      if (markStartedBy) startedBy = markStartedBy;
+
+      const p = audio.play();
+
+      if (p && typeof p.then === "function") {
+        return p.then(() => {
+          setMusicUI(true);
+          return true;
+        }).catch(() => {
+          setMusicUI(false);
+          return false;
+        });
+      }
+
+      setMusicUI(!audio.paused);
+      return Promise.resolve(!audio.paused);
     }
 
     function pauseNow() {
