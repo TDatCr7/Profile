@@ -35,19 +35,35 @@
 
   // ---------- theme ----------
   function setTheme(theme) {
-    document.documentElement.setAttribute("data-theme", theme);
-    safeSet(KEY_THEME, theme);
+    const nextTheme = theme === "light" ? "light" : "dark";
+
+    document.documentElement.setAttribute("data-theme", nextTheme);
+    document.documentElement.style.colorScheme = nextTheme;
+
+    safeSet(KEY_THEME, nextTheme);
   }
 
   function getTheme() {
-    return safeGet(KEY_THEME, "dark") || "dark";
+    const saved = safeGet(KEY_THEME, "dark");
+    return saved === "light" ? "light" : "dark";
   }
 
   function updateThemeUI(btn, icon) {
     const theme = document.documentElement.getAttribute("data-theme") || "dark";
     const isLight = theme === "light";
-    if (btn) btn.setAttribute("aria-pressed", String(isLight));
-    if (icon) icon.textContent = isLight ? "☀️" : "🌙";
+
+    if (btn) {
+      btn.setAttribute("aria-pressed", String(isLight));
+      btn.setAttribute(
+        "aria-label",
+        isLight ? "Switch to dark mode" : "Switch to light mode"
+      );
+      btn.title = isLight ? "Dark mode" : "Light mode";
+    }
+
+    if (icon) {
+      icon.textContent = isLight ? "☀️" : "🌙";
+    }
   }
 
   // ---------- toast ----------
@@ -464,10 +480,9 @@
       const clickedAbout = safeSSGet(SS_ABOUT_CLICK, "0") === "1";
       if (isAboutPath(u.pathname) && clickedAbout) {
         safeSSDel(SS_ABOUT_CLICK);
-        showToast("info", "Chạm nút nhạc để phát.", 2200);
       }
 
-      if (!isAboutPath(u.pathname) && getStartedBy() === "about") {
+      if (!isAboutPath(u.pathname)) {
         pauseNow();
         setStartedBy(null);
       }
@@ -484,8 +499,13 @@
 
       if (isAboutPath(u.pathname)) {
         safeSSSet(SS_ABOUT_CLICK, "1");
+        playNow("about").then((ok) => {
+          if (!ok) showToast("error", "iOS/trình duyệt đang chặn phát nhạc. Hãy chạm nút nhạc một lần.", 3200);
+        });
       } else {
         safeSSDel(SS_ABOUT_CLICK);
+        pauseNow();
+        setStartedBy(null);
       }
 
       loadPage(u.href, { push: true });
@@ -499,7 +519,6 @@
     const clicked = safeSSGet(SS_ABOUT_CLICK, "0") === "1";
     if (isAboutPath(p) && clicked) {
       safeSSDel(SS_ABOUT_CLICK);
-      showToast("info", "Chạm nút nhạc để phát.", 2200);
     }
   }
 
@@ -507,16 +526,24 @@
   document.addEventListener("DOMContentLoaded", function () {
     // THEME
     setTheme(getTheme());
+
     const themeBtn = document.getElementById("themeToggle");
     const themeIcon = document.getElementById("themeIcon");
+
     updateThemeUI(themeBtn, themeIcon);
 
     if (themeBtn) {
       themeBtn.addEventListener("click", function () {
         const cur = document.documentElement.getAttribute("data-theme") || "dark";
         const next = cur === "dark" ? "light" : "dark";
+
+        document.documentElement.classList.add("theme-is-changing");
         setTheme(next);
         updateThemeUI(themeBtn, themeIcon);
+
+        window.setTimeout(function () {
+          document.documentElement.classList.remove("theme-is-changing");
+        }, 260);
       });
     }
 

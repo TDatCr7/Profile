@@ -1,6 +1,6 @@
 ---
 title: "NGÔ NGUYỄN TIẾN ĐẠT"
-role: "Software Engineer / Web Developer"
+role: "Software Engineer / Backend Developer"
 summary: "Yêu thích công nghệ, phá cách và tự do"
 
 sectionStoryTitle: "Story"
@@ -12,36 +12,52 @@ sectionCtaTitle: "Contact"
 sectionMoreTitle: "More"
 
 story: |
-  - Mình là sinh viên công nghệ thông tin trường Đại học Hutech. Hiện tại đang học năm 4 và chuẩn bị đi thực tập. Với niềm đam mê vào sáng tạo và công nghệ thì mình đã và đang đi theo con đường công nghệ phần mềm và đang cố gắng cải thiện tiếng Anh để bắt đầu cho con đường danh phận sắp tới.
+  - Tôi là sinh viên công nghệ thông tin trường Đại học Hutech. Hiện tại đang học năm 4 và đang thực tập. Với niềm đam mê vào sáng tạo và công nghệ thì tôi đã và đang đi theo con đường công nghệ phần mềm và đang chuẩn bị trở thành một Backend Developer.
 
-  - Mình bắt đầu lập trình từ năm nhất 2022 và khá trễ so với các bạn, dù bắt đầu khá muộn nhưng mình biết bằng sự nổ lực cố gắng mỗi ngày thì mình sẽ phát triển thành người mà mình mong muốn. Dù biết con đường công nghệ phần mềm rất khó nhưng vì yêu thích code và các sản phẩm mà công nghệ mang lại thì mình luôn cố gắng mỗi ngày.
+  - Trong 3-6 tháng tới, tôi muốn củng cố kỹ năng lập trình backend, có hiểu biết tốt về frontend, nâng cao khả năng ứng dụng AI vào học tập và làm việc, thích nghi nhanh với môi trường dự án thực tế. Trong 1-2 năm tới, mục tiêu của tôi là trở thành Fresher/Junior Backend Developer có khả năng xây dựng API, làm việc tốt với database và đóng góp vào hệ thống backend ổn định, hiệu quả và cho chất lượng tốt nhất.
 
-  - Mình đã trãi qua nhiều môn làm nhóm và với khả năng giao tiếp khá mạnh dạng, tương đối tốt nên mình quyết định làm nhóm trưởng nếu có thể vì mình muốn nhóm của mình phải đạt kết quả tốt nhất cũng như dẫn bước cho các thành viên trong nhóm đi đúng đường thế mạnh của từng người từ đó phát triển năng lực của mỗi cá nhân trong nhóm.
-
+  - Tôi đã trãi qua nhiều môn làm nhóm và với khả năng giao tiếp khá mạnh dạng và tốt nên tôi quyết định làm nhóm trưởng nếu có thể vì tôi muốn nhóm của tôi phải đạt kết quả tốt nhất cũng như dẫn bước cho các thành viên trong nhóm đi đúng đường thế mạnh của từng người, từ đó phát triển năng lực của mỗi cá nhân trong nhóm.
   
 
 facts:
   - k: "Location"
-    v: "Thành phố Hồ Chí Minh"
+    v: "Ho Chi Minh City"
   - k: "Email"
     v: "tiendatcr712@gmail.com"
-  - k: "Phone number"
+  - k: "Phone"
     v: "0345974119"
-  - k: "Github"
-    v: "https://github.com/TDatCr7"
+  - k: "GitHub"
+    v: "github.com/TDatCr7"
+  - k: "LinkedIn"
+    v: "linkedin.com/in/tdatcr712"
+  - k: "Open to"
+    v: "Backend Developer Intern"
 
 stack:
   - "C#"
-  - "ASP .NET"
-  - "SQL Sever"
-  - "PHP"
-  - "CSS"
-  - "HTML"
-  - "JSON"
+  - "Java"
   - "JavaScript"
-  - "C/C++"
-  - "Python"
-  - "Flutter/Dart"
+  - "PHP"
+  - "ASP.NET Core"
+  - "Spring Boot"
+  - "Entity Framework"
+  - "RESTful API"
+  - "OOP"
+  - "CRUD"
+  - "Database Design"
+  - "MySQL"
+  - "SQL Server"
+  - "MongoDB"
+  - "HTML"
+  - "CSS"
+  - "Git"
+  - "GitHub"
+  - "GitLab"
+  - "Maven"
+  - "VS Code"
+  - "IntelliJ IDEA"
+  - "Laragon"
+  - "AI Tools"
 
 timeline:
   - when: "[01/03/2025 — 09/06/2025]"
@@ -54,12 +70,24 @@ timeline:
     tags: ["C#", "JSON","CSS", "Bootstrap","ASP .NET", "SQL Server","Flutter/Dart"]
 
 now:
-  - "Sinh viên năm tư chuẩn bị thực tập và ra trường"
-  - "Học tiếng anh TOEIC"
-  - "Mục tiêu tốt nghiệp -> có việc làm"
-  - "Cải thiện kỹ năng mềm: giao tiếp, ngôn ngữ và quán lý thành viên."
-ctaText: "Coming soon - CV"
-cvUrl: "[CV_RELATIVE_PATH_OR_URL]"
+  - "Tập trung củng cố backend với ASP.NET Core, Spring Boot, RESTful API và database."
+  - "Tìm hiểu và biết thêm về frontend."
+  - "Rèn luyện khả năng ứng dụng AI hiệu quả vào học tập, lập trình và xử lý vấn đề."
+  - "Chuẩn bị cho vị trí Backend Developer Intern và mục tiêu Fresher/Junior Backend Developer."
+  - "Cải thiện tiếng Anh giao tiếp và kỹ năng làm việc nhóm."
+ctaText: "Liên hệ - CV"
+cvUrl: "cv/NGO_NGUYEN_TIEN_DAT_Backend_CV.pdf"
 ---
 
-Kỹ năng mềm: TeamWork, giao tiếp, tư duy logic, xử lý tình huống, tự học, Leader.
+## Additional strengths
+
+- Team leadership skills in project development.
+- Ability to work on projects in a Full-stack Developer role.
+- Good communication skills and ability to collaborate well with others.
+- Vietnamese: Native.
+- English: CEF B1.
+
+## Certificates
+
+- Communication and Teamwork Skills - 2025.
+- CEF B1 - 2026.
