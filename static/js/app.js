@@ -490,12 +490,39 @@
 
     document.addEventListener("click", function (ev) {
       const a = ev.target && ev.target.closest ? ev.target.closest("a") : null;
+      const href = a.getAttribute("href") || "";
+      const u = new URL(href, window.location.href);
+      const isInternalLink = u.origin === window.location.origin;
+
+      if (!isInternalLink) return;
+
+      const goingAbout = /\/about\/?$/.test(u.pathname);
+      const leavingAbout = !goingAbout;
+
+      if (goingAbout) {
+        safeSSSet(SS_ABOUT_CLICK, "1");
+
+        playNow("about").then((ok) => {
+          if (!ok) {
+            showToast(
+              "error",
+              "Trình duyệt đang chặn phát nhạc. Hãy bấm nút nhạc một lần.",
+              3200
+            );
+          }
+        });
+      }
+
+      if (leavingAbout) {
+        safeSSDel(SS_ABOUT_CLICK);
+        pauseNow();
+        setStartedBy(null);
+      }
+
       if (!shouldHandleLink(a)) return;
 
       ev.preventDefault();
 
-      const href = a.getAttribute("href");
-      const u = new URL(href, window.location.href);
 
       if (isAboutPath(u.pathname)) {
         safeSSSet(SS_ABOUT_CLICK, "1");

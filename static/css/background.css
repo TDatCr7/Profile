@@ -282,3 +282,55 @@ html.theme-is-changing .sky-flash {
     opacity: 0 !important;
   }
 }
+
+/* FORCE SYNC BACKGROUND ON GITHUB PAGES */
+
+html,
+body {
+  min-height: 100%;
+  background: transparent !important;
+}
+
+html {
+  background:
+    radial-gradient(900px 720px at 12% 16%, var(--bg-glow-blue), transparent 62%),
+    radial-gradient(900px 720px at 88% 18%, var(--bg-glow-purple), transparent 62%),
+    radial-gradient(980px 780px at 52% 92%, var(--bg-glow-red), transparent 64%),
+    linear-gradient(180deg, var(--bg-top), var(--bg-mid) 48%, var(--bg-bot)) !important;
+  background-attachment: fixed !important;
+}
+
+body {
+  background: transparent !important;
+}
+
+body::before,
+body::after {
+  background: transparent !important;
+}
+
+html[data-theme="light"] {
+  --bg-top: #f8fbff;
+  --bg-mid: #edf4ff;
+  --bg-bot: #fdf2f8;
+
+  --bg-glow-blue: rgba(59, 130, 246, 0.11);
+  --bg-glow-purple: rgba(168, 85, 247, 0.1);
+  --bg-glow-red: rgba(255, 45, 85, 0.08);
+  --bg-glow-white: rgba(255, 255, 255, 0.62);
+
+  --bg-star-opacity: 0.08;
+}
+
+html[data-theme="dark"] {
+  --bg-top: #050611;
+  --bg-mid: #080b1d;
+  --bg-bot: #0b1020;
+
+  --bg-glow-blue: rgba(59, 130, 246, 0.23);
+  --bg-glow-purple: rgba(168, 85, 247, 0.22);
+  --bg-glow-red: rgba(255, 45, 85, 0.18);
+  --bg-glow-white: rgba(255, 255, 255, 0.045);
+
+  --bg-star-opacity: 0.56;
+}
